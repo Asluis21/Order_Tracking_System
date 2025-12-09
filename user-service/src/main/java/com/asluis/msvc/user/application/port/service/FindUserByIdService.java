@@ -19,6 +19,9 @@ public class FindUserByIdService implements FindUserByIdUseCase{
     @Transactional(readOnly = true)
     @Override
     public User findUserById(Long id) {
+
+        System.out.println("service =======================");
+
         return userRepositoryPort.findById(id)
             .orElseThrow(()-> new UserNotFoundException("User with id " + id + " not found"));
     }

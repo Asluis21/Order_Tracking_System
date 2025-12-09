@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.asluis.msvc.user.application.port.in.CreateUserUseCase;
-import com.asluis.msvc.user.application.port.in.DeleteUserUseCase;
 import com.asluis.msvc.user.application.port.in.FindUserByIdUseCase;
 import com.asluis.msvc.user.application.port.in.UpdatePasswordUseCase;
 import com.asluis.msvc.user.application.port.in.UpdateUserUseCase;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -36,7 +34,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class UserController {
 
     private final CreateUserUseCase createUserUseCase;
-    // private final DeleteUserUseCase deleteUserUseCase;
     private final UpdatePasswordUseCase updatePasswordUseCase;
     private final UpdateUserUseCase updateUserUseCase;
     private final FindUserByIdUseCase findUserByIdUseCase;
@@ -67,7 +64,6 @@ public class UserController {
 
         if (id == 0) return ResponseEntity.notFound().build();
         User found = findUserByIdUseCase.findUserById(id);
-        
         return ResponseEntity.ok(userMapper.toResponseDTO(found));
     }
 
@@ -88,5 +84,11 @@ public class UserController {
         updatePasswordUseCase.updatePassword(id, newPassword);
         return ResponseEntity.ok("Your password has changed");
     }
+
+    // @PatchMapping("/add/address/{userId}")
+    // public ResponseEntity<?> addAddress(@PathVariable Long userId, @RequestBody Address address){
+    //     User user = addAddressUserUseCase.addAddress(userId, address);
+    //     return ResponseEntity.ok(userMapper.toResponseDTO(user));
+    // }
 
 }

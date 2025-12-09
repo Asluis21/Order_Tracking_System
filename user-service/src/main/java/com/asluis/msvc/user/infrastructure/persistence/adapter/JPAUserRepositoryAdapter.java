@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.asluis.msvc.user.application.port.out.UserRepositoryPort;
 import com.asluis.msvc.user.domain.model.User;
@@ -38,12 +37,11 @@ public class JPAUserRepositoryAdapter implements UserRepositoryPort{
 
     @Override
     public Optional<User> findById(Long id) {
-        UserEntity userEntity = springDataUserRepository.findById(id).get();
-        if (userEntity == null) return Optional.empty();
-        return Optional.of(userMapper.toDomain(userEntity));
+        Optional<UserEntity> userEntity = springDataUserRepository.findById(id);
+        if (userEntity.isEmpty()) return Optional.empty();
+        return userEntity.map(userMapper::toDomain);
     }
 
-    @Transactional
     @Override
     public User save(User user) {
         UserEntity userEntity = userMapper.toEntity(user);

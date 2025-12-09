@@ -16,6 +16,8 @@ public class Address {
 
     private Boolean isDefault;
 
+    private Long userId;
+
     public Address() {
     }
 
@@ -74,4 +76,19 @@ public class Address {
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Address [id=" + id + ", street=" + street + ", city=" + city + ", state=" + state + ", postalCode="
+                + postalCode + ", country=" + country + ", isDefault=" + isDefault + ", userId=" + userId + "]";
+    }       
 }

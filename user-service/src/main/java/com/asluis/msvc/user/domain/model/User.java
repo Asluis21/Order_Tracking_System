@@ -1,6 +1,8 @@
 package com.asluis.msvc.user.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -10,6 +12,7 @@ public class User {
     private String email;
     private String password;
     private String phoneNumber;
+    private List<Address> addresses = new ArrayList<>();
     private String registrationIp;
     private String lastLoginId;
     private LocalDateTime lastLoginAt;
@@ -59,6 +62,15 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }    
+
     public String getRegistrationIp() {
         return registrationIp;
     }
@@ -117,7 +129,5 @@ public class User {
                 + lastLoginId + ", lastLoginAt=" + lastLoginAt + ", status=" + status + ", failLoginAttempts="
                 + failLoginAttempts + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", active=" + active
                 + "]";
-    }    
-
-    
+    }
 }

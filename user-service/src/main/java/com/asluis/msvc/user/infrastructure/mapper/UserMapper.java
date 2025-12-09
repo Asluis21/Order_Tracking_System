@@ -9,7 +9,7 @@ import com.asluis.msvc.user.infrastructure.persistence.controller.dto.UserRespon
 import com.asluis.msvc.user.infrastructure.persistence.controller.dto.UserUpdateRequestDTO;
 import com.asluis.msvc.user.infrastructure.persistence.entity.UserEntity;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = AddressMapper.class)
 public interface UserMapper {
 
     UserEntity toEntity(User user);
