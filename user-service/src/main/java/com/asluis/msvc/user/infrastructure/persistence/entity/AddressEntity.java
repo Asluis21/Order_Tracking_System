@@ -43,8 +43,7 @@ public class AddressEntity {
 
     private Boolean isDefault;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    // @JsonBackReference
     private UserEntity user;
 }

@@ -8,7 +8,6 @@ import com.asluis.msvc.user.application.port.in.CreateAddressUseCase;
 import com.asluis.msvc.user.application.port.out.AddressRepositoryPort;
 import com.asluis.msvc.user.application.port.out.UserRepositoryPort;
 import com.asluis.msvc.user.domain.model.Address;
-import com.asluis.msvc.user.domain.model.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +23,7 @@ public class CreateAddressService implements CreateAddressUseCase{
     public Address createAddress(Long userId, Address address) {
 
         userRepositoryPort.findById(userId)
-            .orElseThrow(() -> new UserNotFoundException("User with id " + userId + "not found"));
+            .orElseThrow(() -> new UserNotFoundException("User with id " + userId + " not found"));
 
         address.setIsDefault(false);
         address.setUserId(userId);

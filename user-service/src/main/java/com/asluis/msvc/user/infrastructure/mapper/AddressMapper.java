@@ -12,6 +12,7 @@ import com.asluis.msvc.user.infrastructure.persistence.entity.AddressEntity;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AddressMapper {
 
+    @Mapping(target = "user.id", source = "userId") 
     AddressEntity toEntity(Address address);
 
     @Mapping(target = "userId", source = "user.id") 

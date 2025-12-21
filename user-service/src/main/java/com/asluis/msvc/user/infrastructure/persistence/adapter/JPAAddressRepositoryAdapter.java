@@ -1,6 +1,8 @@
 package com.asluis.msvc.user.infrastructure.persistence.adapter;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,11 +23,12 @@ public class JPAAddressRepositoryAdapter implements AddressRepositoryPort{
     private final SpringDataAddressRepository springDataAddressRepository;
     private final SpringDataUserRepository springDataUserRepository;
 
-
     private final AddressMapper addressMapper;
 
     @Override
     public void deleteAddress(Long id) {
+        findById(id);
+
         springDataAddressRepository.deleteById(id);
     }
 
@@ -49,4 +52,27 @@ public class JPAAddressRepositoryAdapter implements AddressRepositoryPort{
         entity = springDataAddressRepository.save(entity);
         return addressMapper.toDomain(entity);
     }
+
+    @Override
+    public List<Address> findByUserId(Long id) {
+        return springDataAddressRepository.findByUser_id(id)
+            .stream()
+            .map( a -> addressMapper.toDomain(a))
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Address> saveAll(List<Address> addresses) {
+        List<AddressEntity> entities = addresses.
+            stream()
+            .map(d -> addressMapper.toEntity(d))
+            .collect(Collectors.toList());
+
+        return springDataAddressRepository.saveAll(entities)
+            .stream()
+            .map(e -> addressMapper.toDomain(e))
+            .collect(Collectors.toList());
+    }
+
+    
 }
